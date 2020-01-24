@@ -1,0 +1,28 @@
+---
+- name: Provision
+  hosts: mysql-slave
+  become: true
+  tasks:
+    - name: APT | Instal mysql
+      apt: name=mysql-server,mysql-client
+
+    - name: MYSQL | Copy test sql script to create database and tables
+      copy:
+        src: ../../templates/slave/test.sql
+        dest: /usr/local/etc/
+
+    - name: MYSQL | Create test data base and test table
+      shell:
+        cmd: mysql -u root  < /usr/local/etc/test.sql
+
+    - name: MYSQL | Copy my.cnf file
+      copy:
+        src: ../../templates/master/my.cnf
+        dest: /etc/mysql
+
+    - name: MYSQL | Restart mysql servie
+      service:
+        name: mysql
+        state: restarted
+
+
