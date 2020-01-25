@@ -1,6 +1,25 @@
-Basic mysql master slave project.
+- Basic mysql master-slave replica with vagrant ansible provision.
 - Requirements: vagrant and ansible
 
+********** INITIAL CONFIGURATION *************
+- The master and slave templates has got the necessary changes for the configuration
+########## MASTER ##########
+bind-address            = 172.21.99.4
+server-id               = 1
+log_bin                 = /var/log/mysql/mysql-bin.log
+binlog_do_db            = test
+
+########## SLAVE ###########
+server-id    = 2
+relay-log    = /var/log/mysql/mysql-relay-bin.log [added inline]
+log_bin      = /var/log/mysql/mysql-bin.log
+binlog_do_db = invertnew
+
+- A test database is created containing an empty Test table in both servers
+
+- A slave_user is created in the master mysql data base who will be allowed to access to the data base remotelly to perform the sync 
+
+***************** SETUP *****************
 - Setup the vagrant environment
 vagrant up
 
@@ -28,8 +47,14 @@ vagrant ssh mysql-slave
 - Configure the mysql slave with the file and position previously copied
 mysql -u root
 CHANGE MASTER TO MASTER_HOST='172.21.99.4',MASTER_USER='slave_user', MASTER_PASSWORD='slave_user', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=264;
-START SLAVE
 
+- Start the slave replica
+START SLAVE;
+
+- Check the slave status
+SHOW SLAVE STATUS\G;
+
+************ CHECK THE SYNC FEATURE **************
 - Check there are no records yet in the slave data base
 USE test;
 SELECT * FROM Test;
