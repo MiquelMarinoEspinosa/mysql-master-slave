@@ -3,6 +3,7 @@
 
 ********** INITIAL CONFIGURATION *************
 - The master and slave templates has got the necessary changes for the configuration
+
 ########## MASTER ##########
 bind-address            = 172.21.99.4
 server-id               = 1
