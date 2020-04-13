@@ -13,7 +13,7 @@ binlog_do_db            = test
 server-id    = 2
 relay-log    = /var/log/mysql/mysql-relay-bin.log [added inline]
 log_bin      = /var/log/mysql/mysql-bin.log
-binlog_do_db = invertnew
+binlog_do_db = test
 
 - A test database is created containing an empty Test table in both servers
 
@@ -82,16 +82,4 @@ vagrant ssh mysql-slave
 - Check that the record has been sync from master to slave
 mysql -u root
 USE test;
-SELECT * FROM test; 
-
-
-
-
-
-
-
-
-
-
-
-CHANGE MASTER TO MASTER_HOST='172.21.99.4',MASTER_USER='slave_user', MASTER_PASSWORD='slave_user', MASTER_LOG_FILE='mysql-bin.000009', MASTER_LOG_POS=107;
+SELECT * FROM test;
