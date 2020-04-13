@@ -54,7 +54,7 @@ START SLAVE;
 - Check the slave status
 SHOW SLAVE STATUS\G;
 
-************ CHECK THE SYNC FEATURE **************
+************ CHECKING THE SYNC FEATURE **************
 - Check there are no records yet in the slave data base
 USE test;
 SELECT * FROM Test;
