@@ -83,3 +83,15 @@ vagrant ssh mysql-slave
 mysql -u root
 USE test;
 SELECT * FROM test; 
+
+
+
+
+
+
+
+
+
+
+
+CHANGE MASTER TO MASTER_HOST='172.21.99.4',MASTER_USER='slave_user', MASTER_PASSWORD='slave_user', MASTER_LOG_FILE='mysql-bin.000009', MASTER_LOG_POS=107;

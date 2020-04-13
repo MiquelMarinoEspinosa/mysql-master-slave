@@ -17,7 +17,7 @@
 
     - name: MYSQL | Copy my.cnf file
       copy:
-        src: ../../templates/master/my.cnf
+        src: ../../templates/slave/my.cnf
         dest: /etc/mysql
 
     - name: MYSQL | Restart mysql servie
