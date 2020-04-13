@@ -82,4 +82,4 @@ vagrant ssh mysql-slave
 - Check that the record has been sync from master to slave
 mysql -u root
 USE test;
-SELECT * FROM test;
+SELECT * FROM Test;
